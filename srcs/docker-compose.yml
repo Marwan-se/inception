@@ -28,6 +28,6 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-    restart: always
+    restart: on-failure
     env_file:
       - .env

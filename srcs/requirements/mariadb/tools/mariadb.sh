@@ -1,14 +1,6 @@
 #!/bin/sh
 
 # DOMAIN_NAME=msekhsou.42.fr
-DOMAIN_NAME=127.0.0.1
-
-DB_NAME=mariadb
-DB_USER=user
-DB_USER_PASSWD=123
-DB_ROOT_PASSWD=123
-ADMIN_USER=marwan
-ADMIN_PASSWORD=abc
 
 mysql_install_db
 
