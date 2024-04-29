@@ -40,6 +40,15 @@ services:
     env_file:
       - .env
 
+  static_website:
+    container_name: static_website
+    build: ./requirements/bonus/static_website
+    ports:
+      - "1337:80"
+    restart: always
+    volumes:
+      - wp_data:/usr/share/nginx/html
+
 volumes:
   wp_data:
     driver_opts:
