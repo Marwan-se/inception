@@ -49,6 +49,19 @@ services:
     volumes:
       - wp_data:/usr/share/nginx/html
 
+  cadvisor:
+    container_name: cadvisor
+    build: ./requirements/bonus/cadvisor
+    ports:
+      - "9090:9090"
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro 
+      - /sys:/sys:ro 
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart: on-failure
+
 volumes:
   wp_data:
     driver_opts:
