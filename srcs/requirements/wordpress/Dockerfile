@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt update && \
+RUN apt-get update -y && apt-get upgrade -y && \
     apt install -y \
         curl \
         wget \

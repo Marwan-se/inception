@@ -1,10 +1,17 @@
 FROM debian:bullseye
 
-RUN apt-get update && \
-    apt-get install -y mariadb-server mariadb-client
+ARG DB_NAME \
+    DB_USER \
+    DB_USER_PASSWD \
+    DB_ROOT_PASSWD
+
+RUN apt-get update -y && apt-get upgrade -y && \
+    apt-get install -y mariadb-server
 
 COPY ./tools/mariadb.sh .
 
 RUN chmod +x ./mariadb.sh
 
-ENTRYPOINT [ "./mariadb.sh" ]
+RUN ./mariadb.sh
+
+ENTRYPOINT [ "mysqld" ]

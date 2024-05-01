@@ -3,6 +3,7 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx
+    image: nginx:msekhsou
     ports: 
       - "443:443"
     restart: always
@@ -11,18 +12,30 @@ services:
     volumes:
       - wp_data:/var/www/html
       - maria_data:/var/lib/mysql
+    networks:
+      - inception
 
 
   mariadb:
     container_name: mariadb
+    image: mariadb:msekhsou
     restart: always
-    build: ./requirements/mariadb
+    build: 
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+      args:
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_USER_PASSWD: ${DB_USER_PASSWD}
+        DB_ROOT_PASSWD: ${DB_ROOT_PASSWD}
     ports:
       - "3306:3306"
     env_file:
       - .env
     volumes:
       - maria_data:/var/lib/mysql
+    networks:
+      - inception
     
 
   wordpress:
@@ -31,27 +44,32 @@ services:
       - mariadb
     ports:
       - "9000"
-    build:
-      context: ./requirements/wordpress
-      dockerfile: Dockerfile
+    build: ./requirements/wordpress
+    image: wordpress:msekhsou
     restart: on-failure
     volumes:
       - wp_data:/var/www/html
     env_file:
       - .env
+    networks:
+      - inception
 
   static_website:
     container_name: static_website
     build: ./requirements/bonus/static_website
+    image: static_website:msekhsou
     ports:
       - "1337:80"
     restart: always
     volumes:
       - wp_data:/usr/share/nginx/html
+    networks:
+      - inception
 
   cadvisor:
     container_name: cadvisor
     build: ./requirements/bonus/cadvisor
+    image: cadvisor:msekhsou
     ports:
       - "9090:9090"
     privileged: true
@@ -61,14 +79,19 @@ services:
       - /sys:/sys:ro 
       - /var/lib/docker/:/var/lib/docker:ro
     restart: on-failure
+    networks:
+      - inception
 
 
   adminer:
     container_name: adminer
     build: ./requirements/bonus/adminer
+    image: adminer:msekhsou
     ports:
       - "8080:80"
     restart: always
+    networks:
+      - inception
 
 volumes:
   wp_data:
@@ -82,3 +105,6 @@ volumes:
       o: bind
       device: /home/msekhsou/data/data_base
 
+networks:
+  inception:
+    driver: bridge
