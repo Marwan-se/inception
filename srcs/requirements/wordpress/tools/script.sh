@@ -22,13 +22,14 @@ wp theme activate componentz --allow-root
 
 #redis bonus
 
-wp plugin install redis-cache
-wp plugin activate redis-cache
-wp config set WP_REDIS_HOST redis-cache
-wp config set WP_REDIS_PORT 6379 
-wp config set WP_CACHE true --raw 
-wp redis enable
+wp plugin install redis-cache --allow-root
+wp plugin activate redis-cache --allow-root
+wp config set WP_REDIS_HOST redis --allow-root
+wp config set WP_REDIS_PORT 6379  --allow-root
+wp config set WP_CACHE true --raw --allow-root
+wp redis enable --allow-root
 
 #end redis bonus
+
 
 php-fpm7.4 -F

@@ -14,4 +14,4 @@ RUN chmod +x ./mariadb.sh
 
 RUN ./mariadb.sh
 
-ENTRYPOINT [ "mysqld" ]
+ENTRYPOINT [ "mysqld"]

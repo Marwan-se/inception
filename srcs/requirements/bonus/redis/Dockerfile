@@ -4,4 +4,8 @@ RUN apt-get update -y && apt-get upgrade -y
 
 RUN apt-get install redis-server -y
 
-COPY ./conf/redis.conf /etc/redis/redis.conf
+COPY ./tools/redis.sh /
+
+RUN chmod +x /redis.sh
+
+EXPOSE 6379
