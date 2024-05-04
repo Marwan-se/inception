@@ -86,6 +86,7 @@ services:
     container_name: redis
     build: ./requirements/bonus/redis
     image: redis:msekhsou
+  
     restart: always
     networks:
       - inception
