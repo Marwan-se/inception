@@ -28,8 +28,6 @@ services:
         DB_USER: ${DB_USER}
         DB_USER_PASSWD: ${DB_USER_PASSWD}
         DB_ROOT_PASSWD: ${DB_ROOT_PASSWD}
-    ports:
-      - "3306:3306"
     env_file:
       - .env
     volumes:
@@ -42,8 +40,6 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-    ports:
-      - "9000"
     build: ./requirements/wordpress
     image: wordpress:msekhsou
     restart: on-failure
@@ -101,6 +97,21 @@ services:
     restart: always
     networks:
       - inception
+  
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp
+    image: ftp:msekhsou
+    ports:
+      - "21:21"
+    restart: always
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+
 
 volumes:
   wp_data:

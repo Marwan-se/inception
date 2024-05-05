@@ -1,10 +1,5 @@
 #!bin/bash
 
-DB_NAME=mariadb
-DB_USER=user
-DB_USER_PASSWD=123
-DB_ROOT_PASSWD=456
-
 
 sed -i "s/bind-address            = 127.0.0.1/bind-address            = 0.0.0.0/"    /etc/mysql/mariadb.conf.d/50-server.cnf
 
