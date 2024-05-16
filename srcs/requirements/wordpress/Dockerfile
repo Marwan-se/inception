@@ -7,15 +7,7 @@ RUN apt-get update -y && apt-get upgrade -y && \
         php-fpm \
         php-mysql \
         php-curl \
-        php-gd \
-        php-intl \
-        php-mbstring \
-        php-xml \
-        php-zip \
-        unzip \
-        mariadb-client \
-        nginx \
-        supervisor
+        php-zip 
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
