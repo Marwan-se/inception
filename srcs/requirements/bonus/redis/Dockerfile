@@ -8,6 +8,5 @@ COPY ./tools/redis.sh /
 
 RUN chmod +x /redis.sh
 
-EXPOSE 6379
 
 ENTRYPOINT ["/redis.sh"]
